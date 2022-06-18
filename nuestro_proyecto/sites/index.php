@@ -20,11 +20,14 @@
             <input type="submit" value="Importar Usuarios">
         </form>
     <?php } elseif ($_SESSION['tipo'] == 'admin') { ?>
-        <form align="center" action="consultas/propuestas_pendientes.php" method="post">
-            <input type="date" name="fecha1" placeholder="dd/mm/yyyy" value="">
-            <input type="date" name="fecha2" placeholder="dd/mm/yyyy" value="">
-            <input type="submit" name="buscar">
+        <form align="center" id="propuestas_form" action="consultas/propuestas_pendientes.php" method="post">
+            <input type="hidden" name="fecha1" value="">
+            <input type="hidden" name="fecha2" value="">
         </form>
+        <script>
+            document.getElementByID("propuestas_form").sumbit();
+        </script>
+
     <?php } elseif ($_SESSION['tipo'] == 'pasajero') { ?>
         <!-- aqui va el codigo -->
     <?php } elseif ($_SESSION['tipo'] == 'compañia') { ?>

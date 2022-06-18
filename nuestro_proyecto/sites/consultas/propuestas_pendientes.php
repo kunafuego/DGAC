@@ -1,6 +1,5 @@
 <?php include('../templates/header.html'); ?>
 
-<body>
     <?php
         require("../config/conection.php");
 
@@ -34,11 +33,17 @@
 
         $data = $result -> fetchAll();
     ?>
+    
+    <form align="center" action="consultas/propuestas_pendientes.php" method="post">
+        <input type="date" name="fecha1" placeholder="dd/mm/yyyy" value="">
+        <input type="date" name="fecha2" placeholder="dd/mm/yyyy" value="">
+        <input type="submit" name="buscar">
+    </form>    
 
-
-    <!-- Hay que agregar un boton que nos permita aceptar o rechazar cada propuesta de vuelo -->
+    <!-- Hay que verificar que los botones esten funcionando correctamente -->
     <table class="table is-striped is-hoverable"> 
         <tr>
+            <th> modificar estado </th>
             <th> id </th>
             <th> estado </th>
             <th> codigo_vuelo </th>
@@ -54,6 +59,13 @@
         <?php
             foreach ($data as $d) {
                 echo "<tr>
+                        <td>" .
+                            '<form action="consultas/cambiar_estado_propuesta.php" method="get">
+                                <input type="hidden" name="id" value="<?php echo $d[0] ?>">
+                                <input type="submit" name="nuevo_estado" value="aceptar">
+                                <input type="submit" name="nuevo_estado" value="rechazar">
+                            </form>'
+                        . "</td>
                         <td>$d[0]</td>
                         <td>$d[1]</td>
                         <td>$d[2]</td>
@@ -71,6 +83,6 @@
 
     </table>
     <!--  -->
-</body>
+    </body>
 
     <?php include('../templates/footer.html'); ?>
