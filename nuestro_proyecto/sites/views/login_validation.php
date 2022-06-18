@@ -13,10 +13,16 @@
         $_SESSION['timeout'] = time();
         $_SESSION['username'] = $_POST['username'];
         $_SESSION['password'] = $_POST['password'];
-        // aqui tiene que ir una funcion que retorne el tipo de usuario que ingreso a la base de datos
-        // $_SESSION['tipo'] = ;
 
         $msg = "Sesión iniciada correctamente";
-        header("Location: ../index.php?msg=$msg");
+        header("Location: ../index.php?msg=$msg")?>;
+        <form id="form" action="consultas/obtener_tipo_usuario.php" method="post">
+            <input type="hidden" name="username" value="<?php echo $_SESSION['username'] ?>">
+        </form>
+        <script>
+            document.getElementByID("form").sumbit();
+        </script>
+<?php
     }
 ?>
+

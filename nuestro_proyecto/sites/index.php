@@ -18,15 +18,15 @@
         <form align="center" action="views/login.php" method="get">
             <input type="submit" value="Iniciar sesión">
         </form>
-        <form align="center" action="" method="post">
+        <form align="center" action="consultas/importar_usuarios.php" method="post">
             <input type="submit" value="Importar Usuarios">
         </form>
     <?php } elseif ($_SESSION['tipo'] == 'pasajero') { ?>
-
+        <!-- aqui va el codigo -->
     <?php } elseif ($_SESSION['tipo'] == 'admin') { ?>
-
+        <!-- aqui va el codigo -->
     <?php } elseif ($_SESSION['tipo'] == 'compañia') { ?>
-
+        <!-- aqui va el codigo -->
     <?php } ?>
     
 </body>
