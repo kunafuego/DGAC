@@ -1,5 +1,5 @@
 <?php
-    require("../config/conection.php");
+    require("../config/connection.php");
 
     $id = intval( $_POST["id"] );
     $nuevo_estado = $_POST ["nuevo_estado"]

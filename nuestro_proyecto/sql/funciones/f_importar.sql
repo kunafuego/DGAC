@@ -1,8 +1,7 @@
-CREATE OR REPLACE FUNCTION importar_usuario
-  (p1_id integer, p2_id integer, OUT w_name varchar, OUT attacks integer)
-  -- Arriba se espesificó que se entrega w_name como OUTput
-  -- Esto permite retornar output en formato de tabla
-  LANGUAGE plpgsql AS $$
+CREATE OR REPLACE FUNCTION importar_usuario()
+
+RETURNS void AS $$
+
 DECLARE
   admin_usuario RECORD;
   compañia RECORD;
@@ -13,20 +12,26 @@ DECLARE
 BEGIN
   -- Se buscan los tipos de usuarios
 
-  SELECT * INTO admin_usuario FROM usuarios WHERE username = "DGAC";
-  SELECT * INTO compañia FROM usuarios where tipo = "compañia" LIMIT 1;
-  SELECT * INTO pasajero FROM usuarios where tipo = "pasajero" LIMIT 1;
+  SELECT * INTO admin_usuario FROM usuarios WHERE username = 'DGAC';
+  SELECT * INTO compañia FROM usuarios where tipo = 'Compañía aérea' LIMIT 1;
+  SELECT * INTO pasajero FROM usuarios where tipo = 'pasajero' LIMIT 1;
 
   -- Vemos si existe el admin
+  raise notice 'Value: %', admin_usuario;
   IF admin_usuario IS NULL THEN
-
+    INSERT INTO usuarios (username, tipo, contraseña) VALUES ('DGAC', 'Admin DGAC', 'admin');
   -- Debemos crear el usuario admin
   END IF;
 
   -- Vemos si existe la compañia
   IF compañia IS NULL THEN
-  FOR tupla_compañia IN (SELECT * FROM compañias)
-  -- Debemos crear a los usuarios de las compañias
+
+    FOR tupla_compañia IN (SELECT * FROM compañias)
+
+    LOOP
+      -- Generar contraseña
+      INSERT INTO usuarios (username, tipo, contraseña) VALUES (tupla_compañia.codigo_aerolinea, "Compañía aérea", contraseña)
+    END LOOP
   END IF;  
 
   -- Vemos si pasajeros fue creado
@@ -35,4 +40,4 @@ BEGIN
   END IF
 
 END 
-$$
+$$ language plpgsql

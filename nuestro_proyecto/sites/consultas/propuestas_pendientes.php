@@ -1,7 +1,7 @@
 <?php include('../templates/header.html'); ?>
 
     <?php
-        require("../config/conection.php");
+        require("../config/connection.php");
 
         $fecha1= $_POST["fecha1"];
         $fecha2 = $_POST["fecha2"];

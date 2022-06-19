@@ -1,7 +1,7 @@
 <?php include('../templates/header.html'); ?>
 
     <?php
-        require("../config/conection.php");
+        require("../config/connection.php");
 
         $username = $_POST["username"];
 
