@@ -31,7 +31,11 @@
     <?php } elseif ($_SESSION['tipo'] == 'pasajero') { ?>
         <!-- aqui va el codigo -->
     <?php } elseif ($_SESSION['tipo'] == 'compañia') { ?>
-        <!-- aqui va el codigo -->
+        <form align="center" id="vuelos" action="consultas/vuelos.php" method="post">
+        </form>
+        <script>
+            document.getElementByID("vuelos").sumbit();
+        </script>
     <?php } ?>
     
 </body>

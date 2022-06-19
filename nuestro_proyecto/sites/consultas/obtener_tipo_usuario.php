@@ -11,7 +11,7 @@
         $data = $result -> fetchAll();
 
         // Verificar si funciona esto
-        $_SESSION['tipo'] = $data[0][0];
+        $_SESSION['tipo'] = $data['tipo'];
     ?>
 
 <?php include '../templates/footer.html' ?>

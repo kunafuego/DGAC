@@ -5,7 +5,7 @@
     $nuevo_estado = $_POST ["nuevo_estado"]
 
     // Para la base de datos par
-    $query =   "UPDATE planes_de_vuelo
+    $query =   "UPDATE propuestas
                 SET estado = $nuevo_estado
                 WHERE id = $id;";
 
@@ -15,7 +15,7 @@
     // Buscamos los datos del plan de vuelo
     $query2 =   "SELECT *
                 FROM planes_de_vuelo
-                WHERE id = $id;";
+                WHERE propuesta_id = $id;";
 
     $result2 = $db -> prepare($query2);
     $result2 -> execute();
