@@ -2,7 +2,7 @@
 
     <?php
         require("../config/connection.php");
-        $query = "SELECT importar_usuario();";
+        $query = "SELECT * FROM importar_usuario();";
         $result = $db2 -> prepare($query);
         $result -> execute();
         $data = $result -> fetchAll();

@@ -1,14 +1,15 @@
-CREATE OR REPLACE FUNCTION fib (
-    numero integer
-) RETURNS integer AS $$
+CREATE OR REPLACE FUNCTION pass()
 
-DECLARE 
-    largo 
+RETURNS text AS $$
+
+DECLARE
+  valor_contraseña VARCHAR(30);
+
 BEGIN
-    IF numero < 2 THEN
-        RETURN numero;
-    END IF;
-SET largo = 
-RETURN fib(numero - 2) + fib(numero - 1);
-END;
+
+        -- SELECT (floor(random() * (999999999-10000000 + 1) + 10000000))::varchar(30) INTO valor_contraseña;
+    SELECT concat(repeat(length('VPA15631202')::text, floor(random()*10)::int),  repeat(length('DOMINGO AGUERO')::text, floor(random()*10)::int)) INTO valor_contraseña;
+    RETURN valor_contraseña;
+
+END 
 $$ language plpgsql
