@@ -16,12 +16,6 @@
 
         $msg = "Sesión iniciada correctamente";
         header("Location: ../index.php?msg=$msg")?>;
-        <form id="form1" action="consultas/obtener_tipo_usuario.php" method="get">
-            <input type="hidden" name="username" value="<?php echo $_SESSION['username'] ?>">
-        </form>
-        <script>
-            document.getElementByID("form1").sumbit();
-        </script>
 <?php
     }
 ?>
