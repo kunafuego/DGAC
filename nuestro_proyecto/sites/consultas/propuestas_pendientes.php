@@ -53,8 +53,8 @@
                 foreach ($data as $d) {
                     echo "<tr>
                             <td>" .
-                                '<form action="consultas/cambiar_estado_propuesta.php" method="get">
-                                    <input type="hidden" name="id" value="<?php echo $d[0] ?>">
+                                '<form method="post">
+                                    <input type="hidden" name="id" value="'. $d[0] .'">
                                     <input type="submit" name="nuevo_estado" value="aceptar">
                                     <input type="submit" name="nuevo_estado" value="rechazar">
                                 </form>'
