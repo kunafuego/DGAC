@@ -1,50 +1,43 @@
-CREATE OR REPLACE FUNCTION generar_reserva(pasaportes, id_vuelo)
+CREATE OR REPLACE FUNCTION generar_reserva(i1 text, i2 text, i3 text, id_vuelo_reserva integer)
 
 RETURNS void AS $$
 
 DECLARE
-  admin_usuario RECORD;
-  compañia RECORD;
-  pasajero RECORD;
-  tupla_compañia RECORD;
-  tupla_pasajero RECORD;
-  valor_contraseña VARCHAR(40);
-
+  nueva_reserva_id integer;
+  max_reserva integer;
+  codigo_vuelo_reserva text;
+  codigo_reserva text;
+  nombre_comprador text;
+  nacionalidad_comprador text;
+  fecha_nacimiento_comprador date;
+  integrantes text[] := ARRAY[i1,
+                              i2,
+                              i3];
+  integrante text;
 BEGIN
-  -- Se buscan los tipos de usuarios
 
-  SELECT * INTO admin_usuario FROM usuarios WHERE username = 'DGAC';
-  SELECT * INTO compañia FROM usuarios where tipo = 'Compañía aérea' LIMIT 1;
-  SELECT * INTO pasajero FROM usuarios where tipo = 'pasajero' LIMIT 1;
-
-  IF admin_usuario IS NULL THEN
-    INSERT INTO usuarios (username, tipo, contraseña) VALUES ('DGAC', 'Admin DGAC', 'admin');
-  -- Debemos crear el usuario admin
-  END IF;
-
-  -- Vemos si existe la compañia
-  IF compañia IS NULL THEN
-
-    FOR tupla_compañia IN (SELECT * FROM aerolinea)
-
+    FOREACH integrante IN ARRAY integrantes
     LOOP
-      -- Generar contraseña
-      SELECT floor(random() * (999999999-10000000 + 1) + 10000000) INTO valor_contraseña;
-      INSERT INTO usuarios (username, tipo, contraseña) VALUES (tupla_compañia.codigo_aerolinea, 'Compañía aérea', valor_contraseña);
+      IF integrante != '-' THEN
+        -- Se buscan los atributos que debe tener la reserva para ese id_vuelo
+        -- generar el codigo_reserva con el codigo_vuelo del id_vuelo
+        SELECT MAX(CAST(reserva_id AS INT)) INTO max_reserva FROM reservas;
+        nueva_reserva_id := max_reserva + 1;
+        SELECT codigo_vuelo INTO codigo_vuelo_reserva FROM vuelos WHERE CAST(id_vuelo AS INT) = id_vuelo_reserva;
+        codigo_reserva := CONCAT(codigo_vuelo_reserva, '-', CAST(nueva_reserva_id AS text));
+        SELECT nombre INTO nombre_comprador FROM pasajeros WHERE pasaporte = integrante;
+        SELECT nacionalidad INTO nacionalidad_comprador FROM pasajeros WHERE pasaporte = integrante;
+        SELECT fecha_nacimiento INTO fecha_nacimiento_comprador FROM pasajeros WHERE pasaporte = integrante;
+        -- Generar reserva
+        -- Agregar 
+        INSERT INTO reservas VALUES ( CAST(nueva_reserva_id AS VARCHAR(4)), 
+                                      codigo_reserva, 
+                                      integrante, 
+                                      nombre_comprador, 
+                                      nacionalidad_comprador, 
+                                      fecha_nacimiento_comprador);
+      END IF;
     END LOOP;
-  END IF;  
-
-  -- Vemos si pasajeros fue creado
-  IF pasajero IS NULL THEN
-  -- Se deben crear los pasajeros
-    FOR tupla_pasajero IN (SELECT * FROM pasajeros)
-
-    LOOP
-    -- Generar contraseña
-    SELECT concat(repeat(length(tupla_pasajero.pasaporte)::text, floor(random()*10)::int),  repeat(length(tupla_pasajero.nombre)::text, floor(random()*10)::int)) INTO valor_contraseña;
-      INSERT INTO usuarios (username, tipo, contraseña) VALUES (tupla_pasajero.pasaporte, 'Pasajero', valor_contraseña);
-  END LOOP;
-  END IF;
 
 END 
 $$ language plpgsql

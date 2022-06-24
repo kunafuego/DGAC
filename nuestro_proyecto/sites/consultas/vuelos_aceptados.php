@@ -76,7 +76,7 @@
                     foreach ($data as $d) {
                         echo "<tr>
                                 <td>" .
-                                    '<form action="reservar.php" method="get">
+                                    '<form action="consultas/reservar.php" method="get">
                                         <input type="hidden" name="id_vuelo" value="'. $d[0] .'">
                                         <input type="submit" name="reservar" value="reservar">
                                     </form>'
