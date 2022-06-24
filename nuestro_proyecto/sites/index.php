@@ -17,22 +17,31 @@
 ?>
 
 <!-- Para cerrar sesion -->
-<form action="views/logout.php" method="get">
-    <input type="submit" value="Cerrar sesion">
-</form>
+
 
 <!-- Logica principal -->
 <body>
     <h1> Entrega 3 </h1>
     <br>
     <?php if (!isset($_SESSION['username'])) {?>
-        <form align="center" action="views/login.php" method="get">
-            <input type="submit" value="Iniciar sesión">
-        </form>
-        <form align="center" action="consultas/importar_usuarios.php" method="post">
-            <input type="submit" value="Importar Usuarios">
-        </form>
+        <div class="container">
+            <img src="https://wallpaperaccess.com/full/7458403.jpg">
+            <div class="container2">
+                <form align="center" action="views/login.php" method="post">
+                    <input type="submit" value="Iniciar sesión" class="button1">
+                </form>
+                <form align="center" action="consultas/importar_usuarios.php" method="post">
+                    <input type="submit" value="Importar Usuarios" class="button2">
+                </form>
+            </div>
+        </div>
+
     <?php } elseif (returnTipo($_SESSION['username']) == 'Admin DGAC') { ?>
+        <!-- cerrar sesion -->
+        <form action="views/logout.php" method="get">
+            <input type="submit" value="Cerrar sesion">
+        </form>
+        
         <form id="buscador_propuestas" align="center" method="post">
             <input type="date" name="fecha1" placeholder="dd/mm/yyyy" value="">
             <input type="date" name="fecha2" placeholder="dd/mm/yyyy" value="">
@@ -54,7 +63,11 @@
         ?>
 
     <?php } elseif (returnTipo($_SESSION['username']) == 'Pasajero') { ?>
-        
+        <!-- cerrar sesion -->
+        <form action="views/logout.php" method="get">
+            <input type="submit" value="Cerrar sesion">
+        </form>
+
         <!-- mostrar reservas actuales -->
         <?php echo reservasActuales($_SESSION['username']); ?>
 
@@ -101,7 +114,11 @@
         ?>
 
     <?php } elseif (returnTipo($_SESSION['username']) == 'Compañía aérea') { ?>
- 
+        <!-- cerrar sesion -->
+        <form action="views/logout.php" method="get">
+            <input type="submit" value="Cerrar sesion">
+        </form>
+
         <?php 
             echo vuelos();
         ?>
