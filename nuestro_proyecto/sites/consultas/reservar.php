@@ -12,7 +12,7 @@ function myFunction(i) {
         alert("Uno de tus pasajeros tiene un vuelo a la misma hora que el que quieres reservar");
     }
     else if (i == 4){
-        alert("Reserva Realizada con éxito");
+        alert("Reserva Realizada con éxito, se añadieron las reservas para el vuelo ");
     }
 }
 </script>
@@ -64,7 +64,7 @@ function chequear_vuelos($pasaportes, $id_vuelo){
     foreach ($pasaportes as $i => $value){
         if ($value != '-'){
         // Obtenemos los codigos de vuelo de los vuelos que tiene reserva
-        $query = "SELECT codigo_reserva FROM reservas WHERE pasaporte_comprador = $value;";
+        $query = "SELECT codigo_reserva FROM reservas WHERE pasaporte_comprador = '$value';";
         $result = $db2 -> prepare($query);
         $result -> execute();
         $data = $result -> fetchAll();
@@ -72,21 +72,21 @@ function chequear_vuelos($pasaportes, $id_vuelo){
         foreach($data as $vuelo){
             $codigo_vuelo = substr($vuelo[0],0,-5);
             // Obtenemos fechas de los vuelos del comprador
-            $query2 = "SELECT fecha_salida, fecha_llegada FROM vuelos WHERE codigo_vuelo = $codigo_vuelo;";
-            $result2 = $db2 -> prepare($query);
+            $query2 = "SELECT fecha_salida, fecha_llegada FROM vuelos WHERE codigo_vuelo = '$codigo_vuelo';";
+            $result2 = $db2 -> prepare($query2);
             $result2 -> execute();
             $data2 = $result2 -> fetchAll();
             $fecha_salida1 = $data2[0][0];
             $fecha_llegada1 = $data2[0][1];
             // Obtenemos fechas del veuelo que quiere comprar
-            $query3 = "SELECT fecha_salida, fecha_llegada FROM vuelos WHERE id_vuelo = $id_vuelo;";
+            $query3 = "SELECT fecha_salida, fecha_llegada FROM vuelos WHERE CAST(id_vuelo AS INT) = $id_vuelo;";
             $result3 = $db2 -> prepare($query3);
             $result3 -> execute();
             $data3 = $result3 -> fetchAll();
             $fecha_salida2 = $data3[0][0];
             $fecha_llegada2 = $data3[0][1];
             // Chequear que las fechas no se entrecrucen
-            if (($fecha_salida1 <= $fecha_salida2 && $fecha_llegada1 >= $fecha_salida2) || ($fecha_salida1 >= $fecha_salida2 && $fecha_salida1 < $fecha_llegada2)){
+            if (($fecha_salida1 <= $fecha_salida2 && $fecha_llegada1 >= $fecha_salida2) || ($fecha_salida1 >= $fecha_salida2 && $fecha_salida1 <= $fecha_llegada2)){
                 $cruzado = true;
             }
         }}
@@ -105,10 +105,11 @@ function chequear_vuelos($pasaportes, $id_vuelo){
         $resultado -> execute();
         $datos = $resultado -> fetchAll();
         ?>
-        <script>
+         <script>
         myFunction(4);
         </script>
-        <?php   
+         <?php
+        header('Refresh: 0; url = ../index.php')
     }
 }
     
