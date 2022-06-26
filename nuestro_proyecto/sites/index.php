@@ -21,7 +21,7 @@
     <?php if (!isset($_SESSION['username'])) {?>
         <body class="login-body">
         <div class="container">
-            <img src="assets/login_background.jpg"
+            <img src="assets/login_background.jpg">
             <div class="container2">
                 <form align="center" action="views/login.php" method="post">
                     <input type="submit" value="Iniciar sesión" class="button1">
