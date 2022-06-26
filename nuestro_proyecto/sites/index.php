@@ -31,6 +31,7 @@
                 </form>
             </div>
         </div>
+        </body>
 
     <?php } elseif (returnTipo($_SESSION['username']) == 'Admin DGAC') { ?>
         <!-- Bienvenido a  -->

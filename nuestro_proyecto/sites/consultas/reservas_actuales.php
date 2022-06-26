@@ -6,13 +6,11 @@
             $query = "SELECT * FROM reservas WHERE pasaporte_comprador = '$pasaporte';";
             $result = $db2 -> prepare($query);
             $result -> execute();
-            $reservas = $result -> fetchAll();
-            
-            return displayReservas($reservas);
+            $datos = $result -> fetchAll();
+            return displayReservas($datos);
         }
     
-        function displayReservas($reservas) { ?>
-
+        function displayReservas($datos) { ?>
             <label> MIS RESERVAS </label>
             <div class="tbl-header">
                 <table cellpadding="0" cellspacing="0" border="0"> 
@@ -37,5 +35,4 @@
                 </table>
             </div>
         <?php }
-
     ?>
