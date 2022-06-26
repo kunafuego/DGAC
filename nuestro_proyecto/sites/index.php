@@ -124,19 +124,19 @@
         ?>
 
     <?php } elseif (returnTipo($_SESSION['username']) == 'Compañía aérea') { ?>
+        
         <!-- Bienvenido a  -->
-        <?php
-            echo "Bienvenido/a: ";
-            echo $_SESSION['username'];
-        ?>
+        <body class="table-body">
+        <h2><span class="upper-left"> Bienvenido/a: <?php echo $_SESSION['username'] ?> </span></h2>
 
         <!-- cerrar sesion -->
         <form action="views/logout.php" method="get">
-            <input type="submit" value="Cerrar sesion">
+            <input type="submit" value="Cerrar sesion" class="close-button">
         </form>
 
+        <br>
         <?php 
-            echo vuelos();
+            echo vuelos($_SESSION['username']);
         ?>
 
     <?php } ?>
