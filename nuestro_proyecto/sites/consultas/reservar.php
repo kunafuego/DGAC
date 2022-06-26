@@ -109,7 +109,7 @@ function chequear_vuelos($pasaportes, $id_vuelo){
         myFunction(4);
         </script>
          <?php
-        header('Refresh: 0; url = ../index.php')
+        header('Refresh: 0; url = ../index.php');
     }
 }
     

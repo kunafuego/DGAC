@@ -67,9 +67,10 @@
         ?>
 
     <?php } elseif (returnTipo($_SESSION['username']) == 'Pasajero') { ?>
+        <body class="table-body">
         <!-- cerrar sesion -->
         <form action="views/logout.php" method="get">
-            <input type="submit" value="Cerrar sesion">
+        <input type="submit" value="Cerrar sesion" class="close-button">
         </form>
 
         <!-- mostrar reservas actuales -->

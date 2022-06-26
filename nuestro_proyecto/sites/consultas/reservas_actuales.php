@@ -14,20 +14,28 @@
         function displayReservas($reservas) { ?>
 
             <label> MIS RESERVAS </label>
-            <table class="table is-striped is-hoverable"> 
-                <tr>
-                    <th> codigo_reserva </th>
-                </tr>
-
-                <?php
-                    foreach ($reservas as $d) {
-                        echo "<tr>
-                                <td>$d[1]</td>
-                            </tr>";
-                    }
-                ?>
-
-            </table>
+            <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0" border="0"> 
+                    <thread>
+                        <tr>
+                            <th> Código Reserva </th>
+                        </tr>
+                    </thread>
+                </table>
+            </div>
+            <div class="tbl-content">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                        <?php
+                            foreach ($reservas as $d) {
+                                echo "<tr>
+                                        <td>$d[1]</td>
+                                    </tr>";
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         <?php }
 
     ?>
