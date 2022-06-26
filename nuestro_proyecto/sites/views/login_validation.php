@@ -15,7 +15,8 @@
         $_SESSION['password'] = $_POST['password'];
 
         $msg = "Sesión iniciada correctamente";
-        header("Location: ../index.php?msg=$msg");
+        header("Location: ../index.php?msg=$msg")?>;
+<?php
     }
 ?>
 

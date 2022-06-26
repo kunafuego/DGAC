@@ -34,57 +34,46 @@
         }
 
         function displayPropuestasPendientes($data) { ?>
-            <div class="tbl-header">
-                <table cellpadding="0" cellspacing="0" border="0"> 
-                    <thread>
-                        <tr>
-                            <th> modificar estado </th>
-                            <th> codigo vuelo </th>
-                            <th> fecha salida </th>
-                            <th> fecha llegada </th>
-                            <th> aerodromo salida </th>
-                            <th> ciudad salida </th>
-                            <th> aerodromo llegada </th>
-                            <th> ciudad llegada</th>
-                            <th> codigo aeronave </th>
-                            <th> codigo compania </th>
-                            <th> fecha propuesta </th>
-                        </tr>
-                    </thread>
-                </table>
-            </div>
-            <div class="tbl-content">
-                <table cellpadding="0" cellspacing="0" border="0">
-                    <tbody>
-                        <?php
-                            require ('obtener_nombre_aerodromo.php'); # obtenerNombreAerodromo
-                            foreach ($data as $d) {
-                                $nombres_llegada = obtenerNombreAerodromo($d[5]);
-                                $nombres_salida = obtenerNombreAerodromo($d[6]);
-                                echo "<tr>
-                                        <td>" .
-                                            '<form method="post">
-                                                <input type="hidden" name="id" value="'. $d[0] .'">
-                                                <button name="nuevo_estado" value="aceptar" class="accept-button"> &#10004 </button>
-                                                <button name="nuevo_estado" value="rechazar" class="decline-button"> &#10006 </button>
-                                            </form>'
-                                        . "</td>
-                                        <td>$d[2]</td>
-                                        <td>$d[3]</td>
-                                        <td>$d[4]</td>
-                                        <td>$nombres_salida[0]</td>
-                                        <td>$nombres_salida[1]</td>
-                                        <td>$nombres_llegada[0]</td>
-                                        <td>$nombres_llegada[1]</td>
-                                        <td>$d[7]</td>
-                                        <td>$d[8]</td>
-                                        <td>$d[9]</td>
-                                    </tr>";
-                            }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
+            <table class="table is-striped is-hoverable"> 
+                <tr>
+                    <th> modificar estado </th>
+                    <th> id </th>
+                    <th> estado </th>
+                    <th> codigo_vuelo </th>
+                    <th> fecha_salida </th>
+                    <th> fecha_llegada </th>
+                    <th> aerodromo_llegada_id </th>
+                    <th> aerodromo_salida_id </th>
+                    <th> codigo_aeronave </th>
+                    <th> codigo_compania </th>
+                    <th> fecha_propuesta </th>
+                </tr>
+
+            <?php
+                foreach ($data as $d) {
+                    echo "<tr>
+                            <td>" .
+                                '<form method="post">
+                                    <input type="hidden" name="id" value="'. $d[0] .'">
+                                    <input type="submit" name="nuevo_estado" value="aceptar">
+                                    <input type="submit" name="nuevo_estado" value="rechazar">
+                                </form>'
+                            . "</td>
+                            <td>$d[0]</td>
+                            <td>$d[1]</td>
+                            <td>$d[2]</td>
+                            <td>$d[3]</td>
+                            <td>$d[4]</td>
+                            <td>$d[5]</td>
+                            <td>$d[6]</td>
+                            <td>$d[7]</td>
+                            <td>$d[8]</td>
+                            <td>$d[9]</td>
+                        </tr>";
+                }
+            ?>
+
+            </table>
         <?php }
 
     ?>
