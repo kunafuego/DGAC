@@ -12,14 +12,26 @@ DECLARE
 
 BEGIN
   -- Se buscan los tipos de usuarios
+  
+  IF  EXISTS(SELECT FROM pg_tables WHERE tablename='usuarios') THEN
+	admin_usuario := TRUE;
+	compañia := TRUE;
+	pasajero := TRUE;
+  ELSE 
+	admin_usuario := NULL;
+	compañia := NULL;
+	pasajero := NULL;
+	create table usuarios(
+	id SERIAL PRIMARY KEY,
+	username varchar(25),
+	tipo varchar(45),
+	contraseña varchar(50));
+					
+  END IF;
 
-  SELECT * INTO admin_usuario FROM usuarios WHERE username = 'DGAC';
-  SELECT * INTO compañia FROM usuarios where tipo = 'Compañía aérea' LIMIT 1;
-  SELECT * INTO pasajero FROM usuarios where tipo = 'pasajero' LIMIT 1;
 
   IF admin_usuario IS NULL THEN
     INSERT INTO usuarios (username, tipo, contraseña) VALUES ('DGAC', 'Admin DGAC', 'admin');
-  -- Debemos crear el usuario admin
   END IF;
 
   -- Vemos si existe la compañia
@@ -29,7 +41,7 @@ BEGIN
 
     LOOP
       -- Generar contraseña
-      SELECT floor(random() * (999999999-10000000 + 1) + 10000000) INTO valor_contraseña;
+      SELECT floor(random() * (999999999-100 + 1) + 100) INTO valor_contraseña;
       INSERT INTO usuarios (username, tipo, contraseña) VALUES (tupla_compañia.codigo_aerolinea, 'Compañía aérea', valor_contraseña);
     END LOOP;
   END IF;  
@@ -41,7 +53,7 @@ BEGIN
 
     LOOP
     -- Generar contraseña
-    SELECT concat(repeat(length(tupla_pasajero.pasaporte)::text, floor(random()*10)::int),  repeat(length(tupla_pasajero.nombre)::text, floor(random()*10)::int)) INTO valor_contraseña;
+    	SELECT concat(left(tupla_pasajero.pasaporte, floor(random()*10)::int),  left(tupla_pasajero.nombre, floor(random()*10)::int)) INTO valor_contraseña;
       INSERT INTO usuarios (username, tipo, contraseña) VALUES (tupla_pasajero.pasaporte, 'Pasajero', valor_contraseña);
   END LOOP;
   END IF;
