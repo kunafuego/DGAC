@@ -10,8 +10,7 @@
             return displayReservas($datos);
         }
     
-        function displayReservas($datos) { ?>
-            <label> MIS RESERVAS </label>
+        function displayReservas($reservas) { ?>
             <div class="tbl-header">
                 <table cellpadding="0" cellspacing="0" border="0"> 
                     <thread>

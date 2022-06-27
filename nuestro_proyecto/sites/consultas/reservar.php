@@ -1,7 +1,7 @@
 
 <head>
 <script>
-function myFunction(i) {
+function myFunction(i, codigo_de_vuelo = null, pasaportes = null) {
     if (i == 1){
         alert("Debe ingresar al menos un pasaporte para poder realizar la reserva");
     }
@@ -104,9 +104,10 @@ function chequear_vuelos($pasaportes, $id_vuelo){
         $resultado = $db2 -> prepare($consulta);
         $resultado -> execute();
         $datos = $resultado -> fetchAll();
+
         ?>
          <script>
-        myFunction(4);
+            myFunction(4);
         </script>
          <?php
         header('Refresh: 0; url = ../index.php');
@@ -114,28 +115,28 @@ function chequear_vuelos($pasaportes, $id_vuelo){
 }
     
 include('../templates/header.html'); ?>
-<body>
-    <h3> Ingrese los tres pasaportes de quienes desea hacer la reserva </h3>
-    <br>
-    <form class="form" role="form" method="post">
-        <table class="table is-struped is-hoverable">
-            <tr> 
-                <th> Pasaporte Integrante 1 </th>
-                <th> Pasaporte Integrante 2 </th>
-                <th> Pasaporte Integrante 3 </th>
-                <th> Enviar </th>
-            </tr>
-            <tr> 
-                <td> <input type="text" name="integrante1"> </td>
-                <td> <input type="text" name="integrante2"> </td>
-                <td> <input type="text" name="integrante3"> </td>
-                <td> <input type="submit" name="reservar_vuelo" value="Reservar Vuelo"> </td>
+<link rel="stylesheet" href="../styles/style.css">
+<body class="login-body">
+    <div class="container-reservar">
+        <img src="../assets/reservation.jpeg">
+        <div class="container-reservar-2">
+            <h2 style="color: black"> Ingrese los pasaportes para realizar la reserva </h2>
+            <form align="center" class="form" role="form" method="post">
+                <h3> Pasaporte Integrante 1 </h3>
+                <input type="text" name="integrante1">
+                <h3> Pasaporte Integrante 2 </h3>
+                <input type="text" name="integrante2">
+                <h3> Pasaporte Integrante 3 </h3>
+                <input type="text" name="integrante3">
+
+                <input type="submit" name="reservar_vuelo" value="Reservar Vuelo" class="button">
                 <input type="hidden" name="id_vuelo" value="<?php echo $_GET["id_vuelo"] ?>">
-            </tr>
-        </form>
+            </form>
+        </div>  
+    </div>
 </body>
         
-        <?php 
+<?php 
     if (isset($_POST['reservar_vuelo'])) {
         if ($_POST['integrante1'] == '-' && $_POST['integrante2'] == '-' && $_POST['integrante3']== '-'){
             ?>
@@ -154,6 +155,6 @@ include('../templates/header.html'); ?>
             chequear_integrantes($pasaportes, $id_vuelo);
         }
     }
-    ?>
+?>
 
 

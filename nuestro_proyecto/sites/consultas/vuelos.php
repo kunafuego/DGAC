@@ -1,7 +1,7 @@
 
     <?php
     
-        function vuelos($compania) {
+        function Vuelos($compania) {
             require("config/connection.php");
             require ('obtener_nombre_aerodromo.php'); #obtenerNombreAerodromo
 
@@ -49,13 +49,13 @@
                             <tbody>
                                 <?php
                                     foreach ($aceptados as $d) {
-                                        $nombres_llegada = obtenerNombreAerodromo($d[1]);
-                                        $nombres_salida = obtenerNombreAerodromo($d[2]);
+                                        $nombres_llegada = obtenerNombreAerodromo($d[2]);
+                                        $nombres_salida = obtenerNombreAerodromo($d[1]);
                                         echo "<tr>
                                                 <td>$d[0]</td>
                                                 <td>$nombres_salida[0]</td>
                                                 <td>$nombres_salida[1]</td>
-                                                <td>$nombres_llegada[1]</td>
+                                                <td>$nombres_llegada[0]</td>
                                                 <td>$nombres_llegada[1]</td>
                                                 <td>$d[4]</td>
                                                 <td>$d[5]</td>

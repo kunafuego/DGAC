@@ -12,8 +12,8 @@
                 $query = "SELECT propuestas.*
                     FROM propuestas
                     WHERE lower(estado) = 'pendiente'
-                        AND CAST('$fecha1' AS DATE) >= fecha_propuesta
-                        AND CAST('$fecha2' AS DATE) <= fecha_propuesta;";
+                        AND CAST('$fecha1' AS DATE) <= fecha_propuesta
+                        AND CAST('$fecha2' AS DATE) >= fecha_propuesta;";
             } elseif ($fecha2 == '') {
                 $query = "SELECT *
                     FROM propuestas

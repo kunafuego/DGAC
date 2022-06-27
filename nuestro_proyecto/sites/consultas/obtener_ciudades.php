@@ -22,7 +22,7 @@
         // Para transformarlo en un string separado por comas
         $id_aerodromos = implode (", ", $id_aerodromos);
 
-        $query2 = "SELECT nombre_ciudad FROM aerodromos WHERE id IN (" . $id_aerodromos . ");";
+        $query2 = "SELECT DISTINCT nombre_ciudad FROM aerodromos WHERE id IN (" . $id_aerodromos . ");";
         $result2 = $db -> prepare($query2);
         $result2 -> execute();
         $data2 = $result2 -> fetchAll();

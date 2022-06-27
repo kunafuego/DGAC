@@ -103,5 +103,6 @@
         $result8 = $db2 -> prepare($query8);
         $result8 -> execute();
 
+        header("Location: ../index.php");
     }
 ?>
