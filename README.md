@@ -14,4 +14,6 @@ Explicaremos un poco más en profundidad el de generar reservas, pues también s
 ## Generar Reserva
 Esta funcionalidad se realizó mediante la función generar_reserva(), la cual está dentro del archivo f_generar_reserva.sql, también dentro de la carpeta Entrega3. Esta recibe como argumentos 4 valores. Los primeros 3 son, el pasaporte del pasajero en caso de que se haya rellenado ese hueco al generar la reserva, o '-' en caso de que el hueco del formulario haya quedado vacío a la hora de generar la reserva. El 4to es el id del vuelo al cual se deben hacer las reservas. Luego itera por cada integrante, y si el valor es distinto de '-', inserta un valor a la tabla con las reservas.
 
+Luego se inserta también una tupla en la tabla ticket, en la que los atributos no definido se dejan como 0 o 'TBD', dependiendo del tipo de dato con el que estaba definida la tabla.
+
 El resto creemos que es muy intuitivo de corregir! Muchas gracias por su tiempo!

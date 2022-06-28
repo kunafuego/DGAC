@@ -11,7 +11,6 @@
         <div class="containerlogin2">
             <label class="title"> Login </label>
             <br><br><br><br>
-            <?php echo (!isset($_SESSION['username'])) ?>
             <form class="form" role="form" action="login_validation.php" method="post">
                 <label class="label"> Ingrese sus datos </label>
                 <input type="text" name="username" placeholder="nombre de usuario" required autofocus>

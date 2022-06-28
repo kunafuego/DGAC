@@ -5,6 +5,8 @@ RETURNS void AS $$
 DECLARE
   nueva_reserva_id integer;
   max_reserva integer;
+  max_ticket integer;
+  nueva_reserva_ticket integer;
   codigo_vuelo_reserva text;
   codigo_reserva text;
   nombre_comprador text;
@@ -36,6 +38,17 @@ BEGIN
                                       nombre_comprador, 
                                       nacionalidad_comprador, 
                                       fecha_nacimiento_comprador);
+
+        SELECT MAX(CAST(numero_ticket AS INT)) INTO max_ticket FROM ticket;
+        nueva_reserva_ticket := max_ticket + 1;
+        INSERT INTO ticket VALUES(  CAST(nueva_reserva_id AS VARCHAR(5)),
+                                    CAST(nueva_reserva_ticket AS VARCHAR(5)),
+                                    CAST(id_vuelo_reserva AS VARCHAR(5)),
+                                    'TBD',
+                                    'TBD',
+                                    0,
+                                    integrante);
+
       END IF;
     END LOOP;
 

@@ -1,4 +1,3 @@
-
 <head>
 <script>
 function myFunction(i, codigo_de_vuelo = null, pasaportes = null) {
@@ -12,7 +11,13 @@ function myFunction(i, codigo_de_vuelo = null, pasaportes = null) {
         alert("Uno de tus pasajeros tiene un vuelo a la misma hora que el que quieres reservar");
     }
     else if (i == 4){
-        alert("Reserva Realizada con éxito, se añadieron las reservas para el vuelo ");
+        var msg = '';
+        for (const integrante of ['i1', 'i2', 'i3']){
+            if (pasaportes[integrante] != '-'){
+                msg += 'Se ha realizado con éxito la reserva del vuelo ' + String(codigo_de_vuelo) + ' Para el usuario de pasaporte ' + pasaportes[integrante] + '\n';
+            }
+        }
+        alert(msg);
     }
 }
 </script>
@@ -104,10 +109,9 @@ function chequear_vuelos($pasaportes, $id_vuelo){
         $resultado = $db2 -> prepare($consulta);
         $resultado -> execute();
         $datos = $resultado -> fetchAll();
-
         ?>
          <script>
-            myFunction(4);
+            myFunction(4, <?php echo $id_vuelo_int ?>,<?php echo json_encode($pasaportes)?>);
         </script>
          <?php
         header('Refresh: 0; url = ../index.php');
@@ -128,17 +132,18 @@ include('../templates/header.html'); ?>
                 <input type="text" name="integrante2">
                 <h3> Pasaporte Integrante 3 </h3>
                 <input type="text" name="integrante3">
-
+                <br>
                 <input type="submit" name="reservar_vuelo" value="Reservar Vuelo" class="button">
                 <input type="hidden" name="id_vuelo" value="<?php echo $_GET["id_vuelo"] ?>">
             </form>
         </div>  
     </div>
+    
 </body>
         
 <?php 
     if (isset($_POST['reservar_vuelo'])) {
-        if ($_POST['integrante1'] == '-' && $_POST['integrante2'] == '-' && $_POST['integrante3']== '-'){
+        if ($_POST['integrante1'] == '' && $_POST['integrante2'] == '' && $_POST['integrante3']== ''){
             ?>
             <script>
             myFunction(1);

@@ -5,7 +5,6 @@
 
 <?php
     require ('../consultas/obtener_tipo_usuario.php');
-    $msg = '';
     if (isset($_POST['login']) && !empty($_POST['username']) && !empty($_POST['password']))
     {   
         $tipo = returnTipo($_POST['username'], $_POST['password']);
@@ -20,11 +19,9 @@
             header("Location: ../index.php?msg=$msg");
         } 
         else {
-            $msg = '';
-            header("Location: ../views/login.php?msg=$msg");
-        }
-        
-
+        $msg = 'Contraseña Incorrecta';
+        header("Location: ../views/login.php?msg=$msg");
+        }   
     }
 ?>
 
